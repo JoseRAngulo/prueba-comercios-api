@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
 from .models import Business, BusinessSubType
-from .serializers import BusinessSerializer, BusinessSubTypeSerializer
+from .serializers import BusinessSerializer, BusinessSubTypeSerializer, BusinessCreateSerializer
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -16,7 +16,14 @@ def api_root(request, format=None):
 class BusinessList(generics.ListCreateAPIView):
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
+    create_serializer_class = BusinessCreateSerializer
 
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            if hasattr(self, 'create_serializer_class'):
+                return self.create_serializer_class
+
+        return super(BusinessList, self).get_serializer_class()
 class BusinessDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
