@@ -3,13 +3,14 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
-from .models import Business, BusinessSubType
-from .serializers import BusinessSerializer, BusinessSubTypeSerializer, BusinessCreateSerializer
+from .models import Business, BusinessSubType, BusinessType
+from .serializers import BusinessSerializer, BusinessSubTypeSerializer, BusinessCreateSerializer, BusinessTypeSerializer
 
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
         'businesses': reverse('business-list', request=request, format=format),
+        'business-types': reverse('business-type-list', request=request, format=format),
         'business-sub-types': reverse('business-subtype-list', request=request, format=format)
     })
 
@@ -28,6 +29,9 @@ class BusinessDetail(generics.RetrieveUpdateDestroyAPIView):
 
         return super(BusinessList, self).get_serializer_class()
 
+class BusinessTypeList(generics.ListCreateAPIView):
+    queryset = BusinessType.objects.all()
+    serializer_class = BusinessTypeSerializer
 class BusinessSubTypeList(generics.ListCreateAPIView):
     queryset = BusinessSubType.objects.all()
     serializer_class = BusinessSubTypeSerializer
