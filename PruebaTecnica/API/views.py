@@ -15,18 +15,18 @@ def api_root(request, format=None):
 
 class BusinessList(generics.ListCreateAPIView):
     queryset = Business.objects.all()
+    serializer_class = BusinessCreateSerializer
+class BusinessDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Business.objects.all()
     serializer_class = BusinessSerializer
     create_serializer_class = BusinessCreateSerializer
 
     def get_serializer_class(self):
-        if self.request.method == 'POST':
+        if self.request.method == 'PUT':
             if hasattr(self, 'create_serializer_class'):
                 return self.create_serializer_class
 
         return super(BusinessList, self).get_serializer_class()
-class BusinessDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Business.objects.all()
-    serializer_class = BusinessSerializer
 
 class BusinessSubTypeList(generics.ListCreateAPIView):
     queryset = BusinessSubType.objects.all()
