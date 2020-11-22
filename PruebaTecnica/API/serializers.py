@@ -18,6 +18,10 @@ class BusinessSubTypeSerializer(serializers.ModelSerializer):
         model = BusinessSubType
         fields = ['id', 'description', 'type']
 
+class BusinessSubTypeCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BusinessSubType
+        fields = '__all__'
 class BusinessTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessType
