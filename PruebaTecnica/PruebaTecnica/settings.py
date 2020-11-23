@@ -80,6 +80,17 @@ WSGI_APPLICATION = 'PruebaTecnica.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '123',
+        'HOST': 'db', 
+        'PORT': '5432',
+    }
+}
+
+localdb = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'Comercios',
         'USER': 'postgres',
         'PASSWORD': '123',
@@ -87,7 +98,6 @@ DATABASES = {
         'PORT': '5433',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

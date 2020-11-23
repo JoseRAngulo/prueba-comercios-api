@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=123   
+  dj:
+    container_name: dj
+    build: PruebaTecnica
+    command: python manage.py runserver 0.0.0.0:81
+    volumes:
+      - ./PruebaTecnica:/code
+    ports:
+      - "81:81"
+    depends_on:
+      - db
+  ng:
+    container_name: ng
+    build: C:\Users\Jose Rafael Angulo D\Desktop\DynaSoft\Prueba Tecnica NG
+    ports:
+      - "8080:81"
