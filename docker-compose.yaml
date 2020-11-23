@@ -17,6 +17,8 @@ services:
       - "81:81"
     depends_on:
       - db
+    environment:
+      - DJANGO_SETTINGS=dev
   ng:
     container_name: ng
     build: C:\Users\Jose Rafael Angulo D\Desktop\DynaSoft\Prueba Tecnica NG
